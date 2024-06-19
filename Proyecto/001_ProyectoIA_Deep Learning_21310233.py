@@ -38,7 +38,7 @@ import torch.optim as optim #se usan para la división de datos y la normalizaci
 # Suponemos que tenemos 4 características: 
 #tamaño (pies cuadrados), número de pisos, tipo de material (1 a 3), y ubicación (1 a 5)
 np.random.seed(42)
-X = np.random.rand(1000, 4) * [5000, 10, 3, 5]  # 1000 muestras con 4 características
+X = np.random.rand(2000, 4) * [5000, 10, 3, 5]  # 1000 muestras con 4 características
 y = (X[:, 0] * 0.8 + X[:, 1] * 2000 + X[:, 2] * 1500 + X[:, 3] * 1000).reshape(-1, 1)  # Consumo energético en base a una fórmula hipotética
 
 # Convertir datos a tensores de PyTorch para que puedan ser utilizados por la red neuronal.
@@ -65,6 +65,7 @@ model = NeuralNetwork()
 
 # Definir el optimizador y la función de pérdida
 #Utilizamos el optimizador Adam y la función de pérdida MSELoss para el entrenamiento del modelo.
+
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 criterion = nn.MSELoss()
 
@@ -119,6 +120,7 @@ plt.show()
 #COnvertimos los datos normalizados a un tensor de PyTorch
 #Usamos el modelo entrenado para predecir el consumo energetico
 #Invertimos la normalizacion de la prediccion para obtener un valor en las unidades originales y lo imprimimos
+
 nuevos_datos = np.array([[3000, 5, 2, 3]])  # Tamaño, número de pisos, tipo de material y ubicación
 nuevos_datos_tensor = torch.tensor(nuevos_datos, dtype=torch.float32)
 prediccion_consumo = model(nuevos_datos_tensor).item()
